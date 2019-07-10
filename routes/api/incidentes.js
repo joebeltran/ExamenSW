@@ -55,7 +55,7 @@ router.post('/', (req, res, next)=>{
 
 router.put('/:id', (req, res, next)=>{
     var query = {"_id":new ObjectID(req.params.id)};
-    var update = {"$inc":{"views":1, "likes":1}};
+    var update = {"$inc":{"usuarioregistra":1, "usuariorasignado":1}};
 
     examenswColl.updateOne(query, update, (err, rslt)=>{
       if (err) {
