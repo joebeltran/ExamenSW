@@ -53,6 +53,32 @@ router.post('/', (req, res, next)=>{
     });
   });
 
+router.put('/:id', (req, res, next)=>{
+    var query = {"_id":new ObjectID(req.params.id)};
+    var update = {"$inc":{"views":1, "likes":1}};
+
+    examenswColl.updateOne(query, update, (err, rslt)=>{
+      if (err) {
+        console.log(err);
+        return res.status(404).json({ "error": "No Modificado" });
+      }
+      
+      return res.status(200).json(rslt);
+    })
+  }); 
+
+  router.delete('/:id', (req, res, next) => {
+    var query = { "_id": new ObjectID(req.params.id) };
+    examenswColl.removeOne(query, (err, rslt) => {
+      if (err) {
+        console.log(err);
+        return res.status(404).json({ "error": "No Eliminado" });
+      }
+
+      return res.status(200).json(rslt);
+    })
+  });
+
   return router;
 }
 
